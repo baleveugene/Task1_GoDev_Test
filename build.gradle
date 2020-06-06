@@ -18,3 +18,9 @@ dependencies {
 
     testImplementation group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.30'
 }
+
+task goDevTest(type: Test) {
+    systemProperty "browser",System.getProperty("browser")
+    useTestNG()
+    include('GoDevTestSuite.class')
+}

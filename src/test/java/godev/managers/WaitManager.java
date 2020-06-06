@@ -15,4 +15,27 @@ public class WaitManager {
     public WaitManager(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
+
+    public FluentWait<WebDriver> getFluentWait() {
+        return getWait(defaultTimeoutInSeconds);
+    }
+
+    public FluentWait<WebDriver> getFluentWait(long timeOutInSeconds) {
+        return new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(timeOutInSeconds))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(NotFoundException.class);
+    }
+
+    public WebDriverWait getWait() {
+        return getWait(defaultTimeoutInSeconds);
+    }
+
+    public WebDriverWait getWait(long timeOutInSeconds) {
+        return (WebDriverWait) new WebDriverWait(webDriver, timeOutInSeconds)
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(NotFoundException.class);
+    }
 }
