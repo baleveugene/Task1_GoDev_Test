@@ -1,5 +1,6 @@
 package godev;
 
+import godev.page_elements.GoDevPageHeader;
 import org.openqa.selenium.WebDriver;
 
 public abstract class GoDevBasePage {
@@ -17,5 +18,9 @@ public abstract class GoDevBasePage {
 
     public WebDriver getWebDriver() {
         return webDriver;
+    }
+
+    public GoDevPageHeader getHeader() {
+        return new GoDevPageHeader(webDriver);
     }
 }
